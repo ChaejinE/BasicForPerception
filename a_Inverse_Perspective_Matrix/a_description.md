@@ -9,7 +9,7 @@
 ## Projection matrix
 ![image](https://user-images.githubusercontent.com/69780812/146289412-ca0b613b-3eb3-4722-843a-790cf83f034d.png)
 - Perspective Transform을 위한 식이다.
-- homogenious coordinate를 사용하고 있으므로 x', y'에 대한 식은 아래와 같다.
+- [homogenious coordinate](https://github.com/ChaejinE/BasicForPerception/blob/main/a_Inverse_Perspective_Matrix/b_homogeneous_coordinates.md)를 사용하고 있으므로 x', y'에 대한 식은 아래와 같다.
 
 ![image](https://user-images.githubusercontent.com/69780812/146289481-fa39a16e-e910-4747-88f1-cc7bd4886f84.png)
 
@@ -21,9 +21,9 @@
 - 8x8 matrix의 inverse matrix를 구하여 matrix에 곱해주면 되겠다.
 
 # Implementation of Perspective projection
-- Perspective Matrix 구현을 위해서는 Matrix Multiplication과 inverse를 위한 인터페이스가 필요하다.
+- Perspective Matrix 구현을 위해서는 Matrix Multiplication과 **inverse를 위한 인터페이스가 필요**하다.
 - Matrix multiplication : 서로 곱할 수 있는 형식인지 Check 후 단순 계산
-- Inverse : guass elimination을 통해 reduced row echelon form으로 만들어주는 것을 통해 구해낸다.
+- **Inverse : [guass elimination](https://github.com/ChaejinE/BasicForPerception/blob/main/a_Inverse_Perspective_Matrix/e_gaussian_elimination.md)을 통해 [reduced row echelon form](https://github.com/ChaejinE/BasicForPerception/blob/main/a_Inverse_Perspective_Matrix/b_homogeneous_coordinates.md)으로 만들어주는 것을 통해 구해낸다.**
 - 이후 warping만 구현하면 된다.
 
 ## forward mapping
