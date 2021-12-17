@@ -2,16 +2,24 @@
 - Homogeneous Space라고도 하는 동차 좌표계는 무엇을 의미하는가 ?
 - **"N차원 사영 공간을 N+1개의 좌표로 나타내는 좌표계"**
   - 위 정의로 단순히 숫자 3을 대입하면 3차원 공간을 4개의 좌표로 나타낸다고 볼 수 있다.
+  - 간단히 (x, y)를 (x, y, 1)로 표현하는 것이다.
 - 3차원 사영 공간을 4개의 좌표로 나타내보자. (x, y, z, w)
   - w : 0 이라면 선(vector), 1 이라면 점(point)를 의미한다.
 - homogeneous coordinates 에서 **(1, 2, 2, 0)은 (1, 2, 2)의 vector를 의미**하고, **(1, 2, 2, 1)은 (1, 2, 2)의 점(Point)를 의미**하는 것이다.
 - w는 기하학적으로 **원금감을 조절하는 역할**을 하게 된다고 한다.
   - w = 1 이면 아무런 크기의 변화가 없게된다.
+- Homogeneous coordinate에서 scale은 무시되고 (x, y)에 대한 homogeneous 좌표 표현은 무한히 많이 존재하게 된다.
+  - (x, y, z)를 (x, y, z, 1) or (wx, wy, wz, w)로 표현
 - (1, 2, 3)의 homogeneous coordinate 표현 : (1w, 2w, 3w, w) = (1, 2, 3, 1) = (2, 4, 6, 2) 전부 3차원의 (1, 2, 3) 좌표와 동치인 것이다.
+- 역으로 homogeneous 좌표에서 원래 좌표를 구하려면 끝자리가 1이 되도록 scale을 바꾼 후 1을 때내면 된다.
+  - (x, y, w)는 (x/w, y/w, 1)과 같으며 실제 2D 좌표는 (x/w, y/w)이 된다.
 
 # Why use it ?
 - 3차원을 나타내기 위해 3개의 element만 사용했다고 하면, (x, y, z)가 vector인지 point인지 알 수 없다.
   - Homogeneous Coordniates로 나타내서 w를 통해 이를 표현할 수 있게 되는 것이다.
+- Homogeneous coordinate이 활용되는 곳은 3D Vision 쪽이다.
+  - homogeneous 좌표계를 사용하면 Affine 변환, Perspective 변환을 하나의 Single Matrix(단일 행렬)로 표현할 수 있기 때문이다.
+  - 동차 좌표계는 수학적, 물리적 의미가 확실하나 현재는 계산 편의를 위해 사용하는 것이라고 이해해도 좋다.
 
 ![image](https://user-images.githubusercontent.com/69780812/146290365-ec8d756f-0651-4532-a819-cf8ecc2f5f69.png)
 ![image](https://user-images.githubusercontent.com/69780812/146290380-052b8129-6fab-42a2-bcc1-586dba886f69.png)
@@ -62,6 +70,15 @@
 - Clip Space에 있는 MP를 흔히 사용하는 평면인 w=1인 곳으로 가져와서 해석해보자.
 - z가 1보다 크면 x, y가 나눠져서 z가 클 수록 값이 더 작아진다는 사실을 알 수 있다.
   - w 요소값을 조정해서 원근감을 표현할 수 있게되는 것이다.
+
+# Homogeneous 좌표 - Projection 과 무슨관계가 있는가 ?
+- p'=(u, v)라는 정규 이미지 평면(normalized image plane)상의 한 점에 대해 생각해 보자.
+- p'=(u, v)에 대한 homogeneous 좌표 표현은 (u, v, 1)이다. 잘 살펴보면 p'을 카메라 좌표로 봤을 때 3D 좌표도 (u, v, 1)이다.
+- 카메라 좌표계 입장에서 보면 투영선 상에 있는 점들은 3D 좌표는 일반적으로 w(u, v, 1) = (wu, wv, w)이 된다.
+  - (u, v)의 일반적인 homogeneous coordinate 표현과 정확히 일치한다.
+- 위의 관점으로 보면 homogeneous 좌표 (x, y, z)에서 (x/z, y/z)를 구하는 것은 projection, 반대로 (u, v)를 homogeneous 좌표 (wu, wv, w)로 표현하는 것은 inverse projection 과정으로 볼 수 있다.
+- Homogeneous 좌표 표현의 다른 장점은 무한대의 점을 유한 좌표로 표현할 수 있다는 것이다.
+  - (u, v) 방향으로 무한대의 점은 homogeneous 좌표로 (u, v, 0)으로 표현된다.
 
 # Reference
 - 1. https://artiiicy.tistory.com/54
