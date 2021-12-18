@@ -38,3 +38,10 @@
 
 ![image](https://user-images.githubusercontent.com/69780812/146498180-b0b0df2e-3589-4b05-a933-f07b0ae79de8.png)
 - 계산된 강학축에 대한 월드좌표가 계산되면 카메라의 pan, tilt는 위와 같이 계산된다.
+- pitch, roll, yaw 관점에서 보면 tilt는 pitch, pan은 yaw에 해당한다.
+
+![image](https://user-images.githubusercontent.com/69780812/146631708-9297abe7-1ad5-4daf-9806-bb7554e5d5b9.png)
+- roll은 카메라 좌표계의 X축 벡터 Xc=[1,0,0]T에 대한 월드 좌표 벡터 Xw=[xx,xy,xz]T와 월드 좌표계의 X축을 Z축 중심으로 pan 각 만큼 회전시킨 Xpan 사이의 회전각으로 계산된다.
+- roll은 카메라 광학축을 기존으로한 회전각도이다. 카메라와 같은 방향을 바라볼 때 반시계방향이 +이다.
+- 단, sign() 함수는 부호함수다.
+- 이와 같이 어떤 물체에 대한 월드좌표-영상좌표 대응쌍을 4개만 알면 카메라에 대한 모든 위치 및 3D 자세정보를 파악할 수 있다.
